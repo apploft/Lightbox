@@ -15,7 +15,14 @@ open class HeaderView: UIView {
     let button = UIButton(type: .custom)
 
     button.setAttributedTitle(title, for: UIControlState())
-
+                                                          
+    button.setAttributedTitle(title, for: UIControlState())
+    button.imageView?.layer.shadowRadius = 3
+    button.imageView?.layer.shadowColor = UIColor.black.cgColor
+    button.imageView?.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    button.imageView?.layer.shadowOpacity = 0.8
+    button.imageView?.layer.masksToBounds = false
+                                                      
     if let size = LightboxConfig.CloseButton.size {
       button.frame.size = size
     } else {
@@ -69,6 +76,12 @@ open class HeaderView: UIView {
     let button = UIButton(type: .custom)
     
     button.setAttributedTitle(title, for: UIControlState())
+                                                         
+    button.titleLabel?.layer.shadowRadius = 3
+    button.titleLabel?.layer.shadowColor = UIColor.black.cgColor
+    button.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+    button.titleLabel?.layer.shadowOpacity = 0.8
+    button.titleLabel?.layer.masksToBounds = false
     
     if let size = LightboxConfig.DoneButton.size {
         button.frame.size = size
