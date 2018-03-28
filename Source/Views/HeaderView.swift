@@ -3,6 +3,7 @@ import UIKit
 protocol HeaderViewDelegate: class {
   func headerView(_ headerView: HeaderView, didPressDeleteButton deleteButton: UIButton)
   func headerView(_ headerView: HeaderView, didPressCloseButton closeButton: UIButton)
+  func headerView(_ headerView: HeaderView, didPressDoneButton doneButton: UIButton)
 }
 
 open class HeaderView: UIView {
@@ -11,7 +12,7 @@ open class HeaderView: UIView {
       string: LightboxConfig.CloseButton.text,
       attributes: LightboxConfig.CloseButton.textAttributes)
 
-    let button = UIButton(type: .system)
+    let button = UIButton(type: .custom)
 
     button.setAttributedTitle(title, for: UIControlState())
 
@@ -24,9 +25,9 @@ open class HeaderView: UIView {
     button.addTarget(self, action: #selector(closeButtonDidPress(_:)),
       for: .touchUpInside)
 
-    if let image = LightboxConfig.CloseButton.image {
-      button.setBackgroundImage(image, for: UIControlState())
-    }
+    let bundle = Foundation.Bundle(for: HeaderView.self)
+    let image = LightboxConfig.CloseButton.image ?? AssetManager.image("lightbox_close")
+    button.setImage(image, for: UIControlState())
 
     button.isHidden = !LightboxConfig.CloseButton.enabled
 
@@ -59,6 +60,34 @@ open class HeaderView: UIView {
 
     return button
   }()
+  
+  open fileprivate(set) lazy var doneButton: UIButton = { [unowned self] in
+    let title = NSAttributedString(
+        string: LightboxConfig.DoneButton.text,
+        attributes: LightboxConfig.DoneButton.textAttributes)
+    
+    let button = UIButton(type: .custom)
+    
+    button.setAttributedTitle(title, for: UIControlState())
+    
+    if let size = LightboxConfig.DoneButton.size {
+        button.frame.size = size
+    } else {
+        button.sizeToFit()
+    }
+    
+    button.addTarget(self, action: #selector(doneButtonDidPress(_:)),
+                     for: .touchUpInside)
+    
+    let bundle = Foundation.Bundle(for: HeaderView.self)
+    let image = LightboxConfig.DoneButton.image
+    button.setImage(image, for: UIControlState())
+    
+    button.isHidden = !LightboxConfig.DoneButton.enabled
+    
+    return button
+  }()
+
 
   weak var delegate: HeaderViewDelegate?
 
@@ -69,7 +98,7 @@ open class HeaderView: UIView {
 
     backgroundColor = UIColor.clear
 
-    [closeButton, deleteButton].forEach { addSubview($0) }
+    [closeButton, deleteButton, doneButton].forEach { addSubview($0) }
   }
 
   public required init?(coder aDecoder: NSCoder) {
@@ -84,6 +113,10 @@ open class HeaderView: UIView {
 
   @objc func closeButtonDidPress(_ button: UIButton) {
     delegate?.headerView(self, didPressCloseButton: button)
+  }
+  
+  @objc func doneButtonDidPress(_ button: UIButton) {
+    delegate?.headerView(self, didPressDoneButton: button)
   }
 }
 
@@ -101,13 +134,13 @@ extension HeaderView: LayoutConfigurable {
     }
 
     closeButton.frame.origin = CGPoint(
-      x: bounds.width - closeButton.frame.width - 17,
-      y: topPadding
+      x: 0,
+      y: 0
     )
-
-    deleteButton.frame.origin = CGPoint(
-      x: 17,
-      y: topPadding
+    
+    doneButton.frame.origin = CGPoint(
+      x: bounds.width - closeButton.frame.width - 20,
+      y: 1
     )
   }
 }
