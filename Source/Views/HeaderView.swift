@@ -125,13 +125,6 @@ open class HeaderView: UIView {
 extension HeaderView: LayoutConfigurable {
 
   @objc public func configureLayout() {
-    let topPadding: CGFloat
-
-    if #available(iOS 11, *) {
-      topPadding = safeAreaInsets.top
-    } else {
-      topPadding = 0
-    }
 
     closeButton.frame.origin = CGPoint(
       x: 0,
@@ -141,6 +134,11 @@ extension HeaderView: LayoutConfigurable {
     doneButton.frame.origin = CGPoint(
       x: bounds.width - closeButton.frame.width - 20,
       y: 1
+    )
+    
+    deleteButton.frame.origin = CGPoint(
+      x: 17,
+      y: 0
     )
   }
 }
