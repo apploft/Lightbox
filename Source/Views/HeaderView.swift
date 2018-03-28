@@ -53,7 +53,7 @@ open class HeaderView: UIView {
     if let size = LightboxConfig.DeleteButton.size {
       button.frame.size = size
     } else {
-      button.sizeToFit()
+      button.frame.size = CGSize(width: 40, height: 40)
     }
 
     button.addTarget(self, action: #selector(deleteButtonDidPress(_:)),
