@@ -202,12 +202,15 @@ open class LightboxController: UIViewController {
       y: view.bounds.height - footerView.frame.height
     )
 
-    headerView.frame = CGRect(
-      x: 0,
-      y: 0,
-      width: view.bounds.width,
-      height: 100
-    )
+    headerView.translatesAutoresizingMaskIntoConstraints = false
+    if #available(iOS 11, *) {
+        headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+    } else {
+        headerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+    }
+    headerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    headerView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    headerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
   }
 
   open override var prefersStatusBarHidden: Bool {
