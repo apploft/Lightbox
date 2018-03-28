@@ -142,7 +142,7 @@ open class LightboxController: UIViewController {
 
   lazy var transitionManager: LightboxTransition = LightboxTransition()
   var pageViews = [PageView]()
-  var statusBarHidden = false
+  var statusBarHidden = true
 
   fileprivate let initialImages: [LightboxImage]
   fileprivate let initialPage: Int
@@ -204,7 +204,7 @@ open class LightboxController: UIViewController {
 
     headerView.frame = CGRect(
       x: 0,
-      y: 16,
+      y: 0,
       width: view.bounds.width,
       height: 100
     )
@@ -414,6 +414,13 @@ extension LightboxController: HeaderViewDelegate {
     presented = false
     dismissalDelegate?.lightboxControllerWillDismiss(self)
     dismiss(animated: true, completion: nil)
+  }
+
+  func headerView(_ headerView: HeaderView, didPressDoneButton doneButton: UIButton) {
+    doneButton.isEnabled = false
+    presented = false
+    dismissalDelegate?.lightboxControllerWillDismiss(self)
+    dismiss(animated: true, completion: LightboxConfig.DoneButton.action)
   }
 }
 
