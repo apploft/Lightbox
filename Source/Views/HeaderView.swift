@@ -14,9 +14,9 @@ open class HeaderView: UIView {
 
     let button = UIButton(type: .custom)
 
-    button.setAttributedTitle(title, for: UIControlState())
+    button.setAttributedTitle(title, for: UIControl.State())
                                                           
-    button.setAttributedTitle(title, for: UIControlState())
+    button.setAttributedTitle(title, for: UIControl.State())
     button.imageView?.layer.shadowRadius = 3
     button.imageView?.layer.shadowColor = UIColor.black.cgColor
     button.imageView?.layer.shadowOffset = CGSize(width: 0, height: 1.0)
@@ -34,7 +34,7 @@ open class HeaderView: UIView {
 
     let bundle = Foundation.Bundle(for: HeaderView.self)
     let image = LightboxConfig.CloseButton.image ?? AssetManager.image("lightbox_close")
-    button.setImage(image, for: UIControlState())
+    button.setImage(image, for: UIControl.State())
 
     button.isHidden = !LightboxConfig.CloseButton.enabled
 
@@ -60,7 +60,7 @@ open class HeaderView: UIView {
       for: .touchUpInside)
 
     if let image = LightboxConfig.DeleteButton.image {
-      button.setBackgroundImage(image, for: UIControlState())
+      button.setBackgroundImage(image, for: UIControl.State())
     }
 
     button.isHidden = !LightboxConfig.DeleteButton.enabled
@@ -94,7 +94,7 @@ open class HeaderView: UIView {
     
     let bundle = Foundation.Bundle(for: HeaderView.self)
     let image = LightboxConfig.DoneButton.image
-    button.setImage(image, for: UIControlState())
+    button.setImage(image, for: UIControl.State())
     
     button.isHidden = !LightboxConfig.DoneButton.enabled
     
