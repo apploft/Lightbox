@@ -75,7 +75,7 @@ open class HeaderView: UIView {
     
     let button = UIButton(type: .custom)
     
-    button.setAttributedTitle(title, for: UIControlState())
+    button.setAttributedTitle(title, for: UIControl.State())
                                                          
     button.titleLabel?.layer.shadowRadius = 3
     button.titleLabel?.layer.shadowColor = UIColor.black.cgColor
