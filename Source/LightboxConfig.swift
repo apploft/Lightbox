@@ -110,7 +110,7 @@ public class LightboxConfig {
     public static var ellipsisText = ""
     public static var ellipsisColor = UIColor(hex: "899AB9")
 
-    public static var textAttributes: [NSAttributedStringKey: Any] = [
+    public static var textAttributes: [NSAttributedString.Key: Any] = [
       .font: UIFont.systemFont(ofSize: 12),
       .foregroundColor: UIColor(hex: "DBDBDB")
     ]
