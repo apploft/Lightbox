@@ -25,7 +25,7 @@ open class LightboxController: UIViewController {
     scrollView.isPagingEnabled = false
     scrollView.delegate = self
     scrollView.showsHorizontalScrollIndicator = false
-    scrollView.decelerationRate = UIScrollViewDecelerationRateFast
+    scrollView.decelerationRate = UIScrollView.DecelerationRate.fast
 
     return scrollView
   }()
@@ -302,7 +302,7 @@ open class LightboxController: UIViewController {
 
   fileprivate func loadDynamicBackground(_ image: UIImage) {
     backgroundView.image = image
-    backgroundView.layer.add(CATransition(), forKey: kCATransitionFade)
+    backgroundView.layer.add(CATransition(), forKey: kCATransitionFade.rawValue)
   }
 
   func toggleControls(pageView: PageView?, visible: Bool, duration: TimeInterval = 0.1, delay: TimeInterval = 0) {
