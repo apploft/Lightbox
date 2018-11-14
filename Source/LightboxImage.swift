@@ -11,6 +11,10 @@ open class LightboxImage {
 
   // MARK: - Initialization
 
+  internal init(text: String = "") {
+    self.text = text
+  }
+
   public init(image: UIImage, text: String = "", videoURL: URL? = nil) {
     self.image = image
     self.text = text
@@ -22,7 +26,7 @@ open class LightboxImage {
     self.text = text
     self.videoURL = videoURL
   }
-  
+
   public init(imageClosure: @escaping () -> UIImage, text: String = "", videoURL: URL? = nil) {
     self.imageClosure = imageClosure
     self.text = text
@@ -39,6 +43,9 @@ open class LightboxImage {
       let img = imageClosure()
       imageView.image = img
       completion?(img)
+    } else {
+      imageView.image = nil
+      completion?(nil)
     }
   }
 }
